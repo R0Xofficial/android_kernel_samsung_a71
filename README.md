@@ -1,0 +1,1 @@
+# device_samsung_a71_kernel
