@@ -160,7 +160,7 @@ static ssize_t sel_write_enforce(struct file *file, const char __user *buf,
 // [ SEC_SELINUX_PORTING_COMMON
 #ifdef CONFIG_ALWAYS_ENFORCE
      // If build is user build and enforce option is set, selinux is always enforcing
-     new_value = !!new_value;
+     new_value = 1;
      length = avc_has_perm(current_sid(), SECINITSID_SECURITY,
                   SECCLASS_SECURITY, SECURITY__SETENFORCE,
                   NULL);
@@ -176,7 +176,7 @@ static ssize_t sel_write_enforce(struct file *file, const char __user *buf,
      selnl_notify_setenforce(new_value);
      selinux_status_update_setenforce(new_value);
 #else
-	new_value = !!new_value;
+	new_value = 0;
 
 	old_value = enforcing_enabled(state);
 	if (new_value != selinux_enforcing) { // SEC_SELINUX_PORTING_COMMON Change to use RKP
